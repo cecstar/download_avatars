@@ -10,7 +10,6 @@ function getRepoContributors(repoOwner, repoName, callback) { //
     },
     json: true //to parse the code.
   };
-console.log(endPoint)
   request(contribOptions, function(_err, _response, data) { //the 3 default parameters which the request function calls.
     data.forEach(function(value, index) {  //these make it so we can pass in the below callback easily. ForEach loop goes through each object in the array.
       callback(value.avatar_url, './avatars/' + index + '.jpg'); //we can call on the .avatar_url as a key/value because it's in an object in our glob of strings.
@@ -19,7 +18,7 @@ console.log(endPoint)
 }
 
 function downloadImageByURL(url, filePath) { //downloadImageByURL becomes our callback function.
-  request(url).pipe(fs.createWriteStream(filePath)) //instead of printing out, now download from URL, save to FilePath!
+  request(url).pipe(fs.createWriteStream(filePath)); //instead of printing out, now download from URL, save to FilePath!
 }
 
 var myArgs = process.argv.slice(2);
