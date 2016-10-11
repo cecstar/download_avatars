@@ -11,9 +11,9 @@ function getRepoContributors(repoOwner, repoName, callback) { //
     json: true //to parse the code.
   };
 console.log(endPoint)
-  request(contribOptions, function(err, response, data) { //the 3 default parameters the request function calls.
+  request(contribOptions, function(_err, _response, data) { //the 3 default parameters which the request function calls.
     data.forEach(function(value, index) {  //these make it so we can pass in the below callback easily. ForEach loop goes through each object in the array.
-      callback(value.avatar_url, "./avatars/" + index + ".jpg"); //we can cll on the .avatar_url as a key/value because it's in an object in our glob of strings.
+      callback(value.avatar_url, './avatars/' + index + '.jpg'); //we can call on the .avatar_url as a key/value because it's in an object in our glob of strings.
     })
   })
 }
@@ -22,13 +22,10 @@ function downloadImageByURL(url, filePath) { //downloadImageByURL becomes our ca
   request(url).pipe(fs.createWriteStream(filePath)) //instead of printing out, now download from URL, save to FilePath!
 }
 
-//getRepoContributors("lighthouse-labs", "laser_shark", downloadImageByURL) //this is where we are passing in downloadImageByURL as our callback, so that our top level function can use it without needed to be redefined.
-
 var myArgs = process.argv.slice(2);
 getRepoContributors(myArgs[0], myArgs[1], downloadImageByURL);
 
-
-
+//getRepoContributors("lighthouse-labs", "laser_shark", downloadImageByURL) //this is where we are passing in downloadImageByURL as our callback, so that our top level function can use it without needing to be redefined.
 
 /*{ login: 'LaithAzer',
   id: 8368880,
